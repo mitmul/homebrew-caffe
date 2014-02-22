@@ -41,6 +41,7 @@ class Caffe < Formula
       >> Makefile.config
     ]
 
+    python_lib = `python-config --prefix`.strip() + '/lib/libpython2.7.dylib'
     system cmd.join(' ')
     system "make"
     system "make pycaffe"
@@ -49,6 +50,20 @@ class Caffe < Formula
     system "install_name_tool -change libmkl_rt.dylib /opt/intel/mkl/lib/libmkl_rt.dylib libcaffe.so"
     system "install_name_tool -change python/caffe/pycaffe.so caffe/pycaffe.so python/caffe/pycaffe.so"
     system "install_name_tool -change libmkl_rt.dylib /opt/intel/mkl/lib/libmkl_rt.dylib python/caffe/pycaffe.so"
+    system "install_name_tool -change libpython2.7.dylib #{python_lib} python/caffe/pycaffe.so"
+
+    env_add = "export PYTHONPATH=#{prefix}/share:$PYTHONPATH"
+    if ENV['SHELL'].include?('zsh')
+      File.open("#{ENV['HOME']}/.zshrc", 'a') do |file|
+        file.puts env_add
+      end
+      system "source #{ENV['HOME']}/.zshrc"
+    elsif ENV['SHELL'].include?('bash')
+      File.open("#{ENV['HOME']}/.bash_profile", 'a') do |file|
+        file.puts env_add
+      end
+      system "source #{ENV['HOME']}/.bash_profile"
+    end
 
     lib.install Dir['libcaffe*']
     include.install Dir['include/*']
