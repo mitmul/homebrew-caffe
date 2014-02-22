@@ -92,10 +92,6 @@ class OpencvStd < Formula
       system 'cmake', '..', *args
       system "make"
       system "make install"
-
-      Dir.glob('/usr/local/lib/libopencv*.2.4.8.dylib').each do |lib|
-        system "install_name_tool -change libtbb.dylib /opt/intel/tbb/lib/libtbb.dylib #{lib}"
-      end
     end
   end
 end
