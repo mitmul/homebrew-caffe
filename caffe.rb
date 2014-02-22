@@ -24,7 +24,19 @@ class Caffe < Formula
     ENV.append 'DYLD_LIBRARY_PATH', '/opt/intel/composer_xe_2013_sp1.1.103/compiler/lib'
     ENV.append 'DYLD_LIBRARY_PATH', '/opt/intel/composer_xe_2013_sp1.1.103/mkl/lib'
 
-    system "sed -e '/^PYTHON_INCLUDES/ s/\\/usr\\/include/~\\/anaconda\\/include/g' -e '/numpy/ s/\\/usr\\/local/~\\/anaconda/g' -e '/CXX/ s/\\/usr\\/bin\\/g++/\\/usr\\/bin\\/clang++/g' -e '/CXXFLAGS/ s/#CXXFLAGS/CXXFLAGS/' Makefile.config.example Makefile.config"
+    File.copy 'Makefile.config.example', 'Makefile.config'
+
+    includes = `python-config --includes`.split().map{|i| i.gsub('-I', '')}
+    numpy_path = '/python2.7/site-packages/numpy/core/include'
+    includes << `python-config --prefix`.strip() + numpy_path
+
+    inreplace 'Makefile.config' do |s|
+      s.change_make_var! 'PYTHON_INCLUDES', includes.join(' ')
+      s.change_make_var! 'PYTHON_LIB', `python-config --prefix`.strip() + '/lib'
+      s.change_make_var! 'CXX', '/usr/bin/clang++'
+      s.change_make_var! 'CXXFLAGS', '-stdlib=libstdc++'
+    end
+    
     system "make"
     system "make pycaffe"
 
