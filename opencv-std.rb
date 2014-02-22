@@ -48,7 +48,7 @@ class OpencvStd < Formula
     python_library = `python-config --prefix`.strip() + '/lib/libpython2.7.dylib'
     numpy_suffix = '/python2.7/site-packages/numpy/core/include'
     numpy_include = `python-config --prefix`.strip() + numpy_suffix
-    python_packages = `python_config --prefix`.strip() + '/lib/python2.7/site-packages'
+    python_packages = `python-config --prefix`.strip() + '/lib/python2.7/site-packages'
 
     args = std_cmake_args + %W[
       -DBUILD_DOCS=OFF
