@@ -43,6 +43,13 @@ class OpencvStd < Formula
     #The following is necessary because libtool liks to strip LDFLAGS:
     ENV.cxx = "/usr/bin/clang -stdlib=libstdc++"
 
+    python_exe = `which python`
+    python_include = `python-config --includes`.split().map{|i| i.gsub('-I', '')}
+    python_library = `python-config --prefix`.strip() + '/lib/libpython2.7.dylib'
+    numpy_suffix = '/python2.7/site-packages/numpy/core/include'
+    numpy_include = `python-config --prefix`.strip() + numpy_suffix
+    python_packages = `python_config --prefix`.strip() + '/lib/python2.7/site-packages'
+
     args = std_cmake_args + %W[
       -DCMAKE_OSX_DEPLOYMENT_TARGET=
       -DWITH_CUDA=OFF
@@ -53,8 +60,14 @@ class OpencvStd < Formula
       -DBUILD_JASPER=OFF
       -DBUILD_TESTS=OFF
       -DBUILD_PERF_TESTS=OFF
-      -DPYTHON_LIBRARY='#{%x(python-config --prefix).chomp}/lib/libpython2.7.dylib'
+      -DPYTHON_EXECUTABLE='#{python_exe}'
+      -DPYTHON_INCLUDE_DIR='#{python_include}'
+      -DPYTHON_LIBRARY='#{python_library}'
+      -DPYTHON_NUMPY_INCLUDE_DIRS='#{numpy_include}'
+      -DPYTHON_PACKAGES_PATH='#{python_packages}'
     ]
+
+    p args
 
     if build.build_32_bit?
       args << "-DCMAKE_OSX_ARCHITECTURES=i386"
