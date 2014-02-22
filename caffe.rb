@@ -5,14 +5,14 @@ class Caffe < Formula
   url "https://github.com/BVLC/caffe.git"
   version "1.0"
 
-  depends_on 'mitmul/caffe/cmake-std' => %w{build-from-source fresh}
-  depends_on 'mitmul/caffe/boost-std' => %w{build-from-source fresh debug}
-  depends_on 'mitmul/caffe/snappy-std' => %w{build-from-source fresh}
-  depends_on 'mitmul/caffe/leveldb-std' => %w{build-from-source fresh}
-  depends_on 'mitmul/caffe/protobuf-std' => %w{build-from-source fresh}
-  depends_on 'mitmul/caffe/gflags-std' => %w{build-from-source fresh}
-  depends_on 'mitmul/caffe/glog-std' => %w{build-from-source fresh}
-  depends_on 'mitmul/caffe/opencv-std' => %w{build-from-source fresh}
+  depends_on 'cmake-std' => %w{build-from-source fresh}
+  depends_on 'boost-std' => %w{build-from-source fresh debug}
+  depends_on 'snappy-std' => %w{build-from-source fresh}
+  depends_on 'leveldb-std' => %w{build-from-source fresh}
+  depends_on 'protobuf-std' => %w{build-from-source fresh}
+  depends_on 'gflags-std' => %w{build-from-source fresh}
+  depends_on 'glog-std' => %w{build-from-source fresh}
+  depends_on 'opencv-std' => %w{build-from-source fresh}
 
   def install
     ENV.append 'LD_LIBRARY_PATH', '/Developer/NVIDIA/CUDA-5.5/lib'
