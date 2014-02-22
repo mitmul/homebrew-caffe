@@ -16,6 +16,7 @@ class Caffe < Formula
     system "sed", "-e", "\"/^PYTHON_INCLUDES/ s/\/usr\/include/~\/anaconda\/include/g\"", "-e", "\"/numpy/ s/\/usr\/local/~\/anaconda/g", "-e", "\"/CXX/ s/\/usr\/bin\/g++/\/usr\/bin\/clang++/g\"", "-e", "\"/CXXFLAGS/ s/#CXXFLAGS/CXXFLAGS/\"", "Makefile.config.example", "Makefile.config"
 
     system "make"
+    system "make pycaffe"
 
   end
 end
