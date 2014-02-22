@@ -181,6 +181,9 @@ class BoostStd < Formula
 
     args << "address-model=32_64" << "architecture=x86" << "pch=off" if build.universal?
 
+    p bargs
+    p args
+
     system "./bootstrap.sh", *bargs
     system "./b2", *args
   end
