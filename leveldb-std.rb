@@ -12,7 +12,7 @@ class LeveldbStd < Formula
     sha1 'b30b1116005497f772b8af926e7c423f79174aab' => :lion
   end
 
-  depends_on 'snappy'
+  depends_on 'snappy-std'
 
   def install
     #ADD THE FOLLOWING:
