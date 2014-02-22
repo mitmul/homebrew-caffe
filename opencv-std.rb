@@ -43,7 +43,7 @@ class OpencvStd < Formula
     #The following is necessary because libtool liks to strip LDFLAGS:
     ENV.cxx = "/usr/bin/clang -stdlib=libstdc++"
 
-    python_exe = `which python`
+    python_exe = `which python`.strip()
     python_include = `python-config --includes`.split().map{|i| i.gsub('-I', '')}
     python_library = `python-config --prefix`.strip() + '/lib/libpython2.7.dylib'
     numpy_suffix = '/python2.7/site-packages/numpy/core/include'

@@ -123,8 +123,8 @@ class BoostStd < Formula
     # we specify libdir too because the script is apparently broken
     bargs = ["--prefix=#{prefix}", "--libdir=#{lib}"]
 
-    python_bin = `which python`
-    python_root = `python-config --prefix`
+    python_bin = `which python`.strip()
+    python_root = `python-config --prefix`.strip()
     bargs = ["--with-python=#{python_bin}", "--with-python-root=#{python_root}"]
 
     if build.with? 'icu'
