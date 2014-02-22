@@ -51,42 +51,20 @@ class OpencvStd < Formula
     python_packages = `python-config --prefix`.strip() + '/lib/python2.7/site-packages'
 
     args = std_cmake_args + %W[
-      -DBUILD_DOCS=OFF
-      -DBUILD_EXAMPLE=OFF
-      -DBUILD_JASPER=OFF
-      -DBUILD_JPEG=OFF
-      -DBUILD_OPENEXR=OFF
-      -DBUILDPACKAGE=OFF
-      -DBUILD_PERF_TESTS=OFF
-      -DBUILD_PNG=OFF
-      -DBUILD_SHARED_LIBS=ON
-      -DBUILD_TBB=OFF
-      -DBUILD_TESTS=OFF
-      -DBUILD_TIFF=OFF
-      -DBUILD_WITH_DEBUG_INFO=OFF
-      -DBUILD_ZLIB=OFF
-      -DBUILD_opencv_matlab=OFF
-      -DENABLE_FAST_MATH=ON
-      -DENABLE_AVX=ON
-      -DENABLE_SSE=ON
-      -DENABLE_SSE2=ON
-      -DENABLE_SSE3=ON
-      -DENABLE_SSE41=ON
-      -DENABLE_SSE42=ON
-      -DENABLE_SSSE3=ON
-      -DWITH_CUBLAS=OFF
+      -DCMAKE_OSX_DEPLOYMENT_TARGET=
       -DWITH_CUDA=OFF
-      -DWITH_CUFFT=OFF
-      -DWITH_TBB=ON
-      -DTBB_INCLUDE_DIRS='/opt/intel/tbb/include'
-      -DTBB_LIB_DIR='/opt/intel/tbb/lib'
-      -DTBB_STDDEF_PATH='/opt/intel/tbb/include/tbb/tbb_stddef.h'
+      -DBUILD_ZLIB=OFF
+      -DBUILD_TIFF=OFF
+      -DBUILD_PNG=OFF
+      -DBUILD_JPEG=OFF
+      -DBUILD_JASPER=OFF
+      -DBUILD_TESTS=OFF
+      -DBUILD_PERF_TESTS=OFF
       -DPYTHON_EXECUTABLE='#{python_exe}'
       -DPYTHON_INCLUDE_DIR='#{python_include}'
       -DPYTHON_LIBRARY='#{python_library}'
       -DPYTHON_NUMPY_INCLUDE_DIRS='#{numpy_include}'
       -DPYTHON_PACKAGES_PATH='#{python_packages}'
-      -Wno-dev
     ]
 
     p args
@@ -114,6 +92,10 @@ class OpencvStd < Formula
       system 'cmake', '..', *args
       system "make"
       system "make install"
+
+      Dir.glob('/usr/local/lib/libopencv*.2.4.8.dylib').each do |lib|
+        system "install_name_tool -change libtbb.dylib /opt/intel/tbb/lib/libtbb.dylib #{lib}"
+      end
     end
   end
 end
