@@ -28,12 +28,12 @@ class Caffe < Formula
     includes = `python-config --includes`.split().map{|i| i.gsub('-I', '')}
     numpy_path = '/python2.7/site-packages/numpy/core/include'
     includes << `python-config --prefix`.strip() + numpy_path
-
+    home = ENV['HOME'].gsub('/', '\\/')
     cmd = %W[
       sed
-      -e '/^PYTHON_INCLUDES/ s/\\/usr\\/include/~\\/anaconda\\/include/g'
-      -e '/numpy/ s/\\/usr\\/local/~\\/anaconda/g'
-      -e '/^PYTHON_LIB/ s/\\/usr\\/local\\/lib/~\\/anaconda\\/lib/g'
+      -e '/^PYTHON_INCLUDES/ s/\\/usr\\/include/#{home}\\/anaconda\\/include/g'
+      -e '/numpy/ s/\\/usr\\/local/#{home}\\/anaconda/g'
+      -e '/^PYTHON_LIB/ s/\\/usr\\/local\\/lib/#{home}\\/anaconda\\/lib/g'
       -e '/CXX/ s/\\/usr\\/bin\\/g++/\\/usr\\/bin\\/clang++/g'
       -e '/CXXFLAGS/ s/#CXXFLAGS/CXXFLAGS/'
       Makefile.config.example
@@ -42,7 +42,6 @@ class Caffe < Formula
 
     system cmd.join(' ')
     system "make"
-    p 'make finished'
     system "make pycaffe"
 
     (lib + 'caffe').install Dir['libcaffe*']
