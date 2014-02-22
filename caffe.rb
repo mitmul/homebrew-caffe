@@ -3,8 +3,10 @@ require "formula"
 class Caffe < Formula
   homepage "http://caffe.berkeleyvision.org/"
   url "https://github.com/BVLC/caffe.git"
+  version "1.0"
 
   def install
+
     system "brew", "install", "--build-from-source", "--fresh", "-vd", "mitmul/caffe/cmake"
     system "brew", "install", "--build-from-source", "--fresh", "-vd", "mitmul/caffe/boost"
     system "brew", "install", "--build-from-source", "--fresh", "-vd", "mitmul/caffe/snappy"
