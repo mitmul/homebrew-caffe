@@ -19,13 +19,13 @@ class BoostStd < Formula
 
   head 'http://svn.boost.org/svn/boost/trunk'
 
-  bottle do
-    cellar :any
-    revision 1
-    sha1 'e715bed5765c5a89fd2c7f2938bf4db405a11fbc' => :mavericks
-    sha1 '099a7374e95690e2268f7abbd4ccfb0559541b73' => :mountain_lion
-    sha1 '1961f75f2139f3f0998aae03a1be8e9ac553d292' => :lion
-  end
+  # bottle do
+  #   cellar :any
+  #   revision 1
+  #   sha1 'e715bed5765c5a89fd2c7f2938bf4db405a11fbc' => :mavericks
+  #   sha1 '099a7374e95690e2268f7abbd4ccfb0559541b73' => :mountain_lion
+  #   sha1 '1961f75f2139f3f0998aae03a1be8e9ac553d292' => :lion
+  # end
 
   env :userpaths
 
