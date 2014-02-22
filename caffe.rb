@@ -26,12 +26,13 @@ class Caffe < Formula
     ENV.append 'DYLD_LIBRARY_PATH', '/opt/intel/composer_xe_2013_sp1.1.103/mkl/lib'
 
     includes = `python-config --includes`.split().map{|i| i.gsub('-I', '')}
-    numpy_path = '/python2.7/site-packages/numpy/core/include'
+    numpy_path = '/lib/python2.7/site-packages/numpy/core/include'
     includes << `python-config --prefix`.strip() + numpy_path
+    includes = includes.join(' ').gsub('/', '\\/')
     home = ENV['HOME'].gsub('/', '\\/')
     cmd = %W[
       sed
-      -e '/^PYTHON_INCLUDES/ s/\\/usr\\/include/#{home}\\/anaconda\\/include/g'
+      -e '/^PYTHON_INCLUDES/ s/\\/usr\\/include\\/python2.7/#{includes}/g'
       -e '/numpy/ s/\\/usr\\/local/#{home}\\/anaconda/g'
       -e '/^PYTHON_LIB/ s/\\/usr\\/local\\/lib/#{home}\\/anaconda\\/lib/g'
       -e '/CXX/ s/\\/usr\\/bin\\/g++/\\/usr\\/bin\\/clang++/g'
@@ -44,7 +45,8 @@ class Caffe < Formula
     system "make"
     system "make pycaffe"
 
-    (lib + 'caffe').install Dir['libcaffe*']
+    lib.install Dir['libcaffe*']
     include.install Dir['include/*']
+    share.install Dir['python/*']
   end
 end
