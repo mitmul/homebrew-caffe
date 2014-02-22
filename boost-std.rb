@@ -121,6 +121,10 @@ class BoostStd < Formula
     # we specify libdir too because the script is apparently broken
     bargs = ["--prefix=#{prefix}", "--libdir=#{lib}"]
 
+    python_bin = `which python`
+    python_root = `python-config --prefix`
+    bargs = ["--with-python=#{python_bin}", "--with-python-root=#{python_root}"]
+
     if build.with? 'icu'
       icu4c_prefix = Formula.factory('icu4c').opt_prefix
       bargs << "--with-icu=#{icu4c_prefix}"
