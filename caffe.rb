@@ -52,7 +52,7 @@ class Caffe < Formula
     system "install_name_tool -change libmkl_rt.dylib /opt/intel/mkl/lib/libmkl_rt.dylib python/caffe/pycaffe.so"
     system "install_name_tool -change libpython2.7.dylib #{python_lib} python/caffe/pycaffe.so"
 
-    env_add = "export PYTHONPATH=#{prefix}/share:$PYTHONPATH"
+    env_add = "export PYTHONPATH=#{prefix}/python:$PYTHONPATH"
     if ENV['SHELL'].include?('zsh')
       File.open("#{ENV['HOME']}/.zshrc", 'a') do |file|
         file.puts env_add
@@ -65,6 +65,10 @@ class Caffe < Formula
 
     lib.install Dir['libcaffe*']
     include.install Dir['include/*']
-    share.install Dir['python/*']
+    (share + 'caffe/data').install Dir['data/*']
+    (share + 'caffe/examples').install Dir['examples/*']
+    (share + 'caffe/build').install Dir['build/*']
+    (share + 'caffe/python').install Dir['python/*']
+    (share + 'caffe/scripts').install Dir['scripts/*']
   end
 end
