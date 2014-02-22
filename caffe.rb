@@ -65,10 +65,10 @@ class Caffe < Formula
 
     lib.install Dir['libcaffe*']
     include.install Dir['include/*']
-    (share + 'data').install Dir['data/*']
-    (share + 'examples').install Dir['examples/*']
-    (share + 'build').install Dir['build/*']
-    (share + 'python').install Dir['python/*']
-    (share + 'scripts').install Dir['scripts/*']
+    (share + 'caffe/data').install Dir['data/*']
+    (share + 'caffe/examples').install Dir['examples/*']
+    (share + 'caffe/build').install Dir['build/*']
+    (share + 'caffe/python').install Dir['python/*']
+    (share + 'caffe/scripts').install Dir['scripts/*']
   end
 end
