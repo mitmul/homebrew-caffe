@@ -57,12 +57,10 @@ class Caffe < Formula
       File.open("#{ENV['HOME']}/.zshrc", 'a') do |file|
         file.puts env_add
       end
-      system "source #{ENV['HOME']}/.zshrc"
     elsif ENV['SHELL'].include?('bash')
       File.open("#{ENV['HOME']}/.bash_profile", 'a') do |file|
         file.puts env_add
       end
-      system "source #{ENV['HOME']}/.bash_profile"
     end
 
     lib.install Dir['libcaffe*']
