@@ -12,7 +12,7 @@ class OpencvStd < Formula
 
   option :cxx11
 
-  depends_on 'cmake' => :build
+  depends_on 'cmake-std' => :build
   depends_on 'pkg-config' => :build
   depends_on 'numpy' => :python
   depends_on :python
