@@ -1,6 +1,6 @@
 require 'formula'
 
-class Snappy < Formula
+class SnappyStd < Formula
   homepage 'http://snappy.googlecode.com'
   url 'https://snappy.googlecode.com/files/snappy-1.1.1.tar.gz'
   sha1 '2988f1227622d79c1e520d4317e299b61d042852'

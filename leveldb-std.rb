@@ -1,6 +1,6 @@
 require 'formula'
 
-class Leveldb < Formula
+class LeveldbStd < Formula
   homepage 'https://code.google.com/p/leveldb/'
   url 'https://leveldb.googlecode.com/files/leveldb-1.15.0.tar.gz'
   sha1 '74b70a1156d91807d8d84bfdd026e0bb5acbbf23'

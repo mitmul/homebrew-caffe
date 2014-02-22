@@ -20,7 +20,7 @@ class NoExpatFramework < Requirement
   end
 end
 
-class Cmake < Formula
+class CmakeStd < Formula
   homepage 'http://www.cmake.org/'
   url 'http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz'
   sha1 'cca70b307aa32a6a32c72e01fdfcecc84c1c2690'

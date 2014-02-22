@@ -1,6 +1,6 @@
 require 'formula'
 
-class Opencv < Formula
+class OpencvStd < Formula
   homepage 'http://opencv.org/'
   url 'https://github.com/Itseez/opencv/archive/2.4.7.1.tar.gz'
   sha1 'b6b0dd72356822a482ca3a27a7a88145aca6f34c'
