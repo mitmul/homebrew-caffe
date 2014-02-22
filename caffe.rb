@@ -19,5 +19,8 @@ class Caffe < Formula
     system "make"
     system "make pycaffe"
 
+    (lib + 'caffe').install Dir['libcaffe*']
+    include.install Dir['include/*']
+
   end
 end
