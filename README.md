@@ -7,7 +7,7 @@ homebrew-caffe is a project for installing [Caffe][] with [Homebrew][homebrew] t
 
 ### 1. Uninstall dependencies
 
-If you already installed dependencies with homebrew, please uninstall them. They are installed with `libc++` but Caffe needs dependenceis built with `libstdc++`.
+If you already installed dependencies with homebrew, please uninstall them. They are installed with `libc++` but Caffe needs dependencies built with `libstdc++`.
 
 	$ brew uninstall cmake
 	$ brew uninstall boost
