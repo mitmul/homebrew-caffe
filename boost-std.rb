@@ -33,6 +33,8 @@ class BoostStd < Formula
   option 'with-icu', 'Build regexp engine with icu support'
   option 'without-single', 'Disable building single-threading variant'
   option 'without-static', 'Disable building static library variant'
+  option 'with-multi', 'Enable bulding multi-threading variant'
+  option 'with-shared', 'Enable building shared library variant'
   option 'with-mpi', 'Build with MPI support'
   option :cxx11
 
@@ -163,14 +165,18 @@ class BoostStd < Formula
 
     if build.include? 'without-single'
       args << "threading=multi"
-    else
+    elsif build.include? 'with-multi'
       args << "threading=multi,single"
+    else
+      args << "threading=single"
     end
 
     if build.include? 'without-static'
       args << "link=shared"
-    else
+    elsif build.include? 'with-shared'
       args << "link=shared,static"
+    else
+      args << "link=static"
     end
 
     args << "address-model=32_64" << "architecture=x86" << "pch=off" if build.universal?
