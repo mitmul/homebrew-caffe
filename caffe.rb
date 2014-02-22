@@ -44,6 +44,11 @@ class Caffe < Formula
     system cmd.join(' ')
     system "make"
     system "make pycaffe"
+    system "chmod a+w libcaffe.so"
+    system "chmod a+w libcaffe.a"
+    system "install_name_tool -change libmkl_rt.dylib /opt/intel/mkl/lib/libmkl_rt.dylib libcaffe.so"
+    system "install_name_tool -change python/caffe/pycaffe.so caffe/pycaffe.so python/caffe/pycaffe.so"
+    system "install_name_tool -change libmkl_rt.dylib /opt/intel/mkl/lib/libmkl_rt.dylib python/caffe/pycaffe.so"
 
     lib.install Dir['libcaffe*']
     include.install Dir['include/*']
